@@ -27,8 +27,8 @@ int apple::GetScale()
 
 void apple::SetPosition()
 {
-	Position.x = static_cast <float> ((rand() % 10) * 50);
-	Position.y = static_cast <float> ((rand() % 10) * 50);
+	Position.x = static_cast <float> ((rand() % 21) * 50);
+	Position.y = static_cast <float> ((rand() % 17) * 50);
 }
 
 void apple::DrawApple()

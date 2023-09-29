@@ -13,7 +13,7 @@ fix collision between the snake and the apple
 ////////////
 
 Fix randomized position of the apple:
-It can spawn on the snake and only spawns on the left side of the screen
+It can spawn on the snake
 ////////////
 
 Add UI:

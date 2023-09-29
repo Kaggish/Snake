@@ -2,7 +2,7 @@
 #include <iostream>
 
 score::score()
-	:Position{(float)GetScreenWidth() / 2, 0.0f}
+	:Position{(float)GetScreenWidth() / 2 - 70.0f, 0.0f}
 	,Score(0)
 	,color{255, 255, 255, 255}
 {
