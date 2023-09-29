@@ -1,52 +1,44 @@
 #include "Tail.h"
 
-tail::tail(Screen& p_screen, int prevX, int prevY)
+tail::tail(Vector2 p_position)
+	:Position(p_position)
+	,PreviousPosition({1.0f, 1.0f})
+	,scale(50)
+	,color({0, 255, 0, 255})
 {
-	x = prevX;
-	y = prevY;
-	scale = 50;
-	color = { 0, 255, 0, 255 };
-	tailprevX = 1;
-	tailprevY = 1;
 }
 
-tail::~tail()
+float tail::GetPrevX()
 {
-
+	return PreviousPosition.x;
 }
 
-int tail::GetPrevX()
+float tail::GetPrevY()
 {
-	return tailprevX;
+	return PreviousPosition.y;
 }
 
-int tail::GetPrevY()
+void tail::SetX(float p_positionX)
 {
-	return tailprevY;
+	Position.x = p_positionX;
 }
 
-void tail::SetX(int p_x)
+void tail::SetY(float p_positionY)
 {
-	x = p_x;
+	Position.y = p_positionY;
 }
 
-void tail::SetY(int p_y)
+void tail::DrawTail()
 {
-	y = p_y;
-}
-
-void tail::DrawTail(Screen &p_screen)
-{
-	p_screen.DrawRectangle(x, y, scale, scale, color);
+	DrawRectangle((int)Position.x, (int)Position.y, scale, scale, color);
 }
 
 void tail::Update()
 {
-	tailprevX = x;
-	tailprevY = y;
+	PreviousPosition = Position;
 }
 
-void tail::Draw(Screen &p_screen)
+void tail::Draw()
 {
-	DrawTail(p_screen);
+	DrawTail();
 }

@@ -1,17 +1,20 @@
 #pragma once
-#include "screen.h"
+#include "raylib.h"
+#include <string>
+#include <cstring>
 
 class score
 {
-	int x, y, Score;
+	Vector2 Position;
+	int Score;
 	Color color;
 
 	void AddScore();
-	void DrawText(Screen &p_screen);
+	void WriteText();
 public:
-	score(Screen &p_screen);
-	~score();
+	score();
+	~score() = default;
 	void Update();
-	void Draw(Screen& p_screen);
+	void Draw();
 	int GetScore();
 };

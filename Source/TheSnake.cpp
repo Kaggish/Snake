@@ -1,88 +1,80 @@
 #include <iostream>
 #include "TheSnake.h"
-#include "screen.h"
 
-snake::snake(Screen &p_screen)
+snake::snake()
+	:Position{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2}
+	,scale(50)
+	,SPEED(5)
+	,Xdir(0)
+	,Ydir(1)
+	,PreviousPosition{ 1.0f, 1.0f }
+	,color{0, 255, 0, 255}
 {
-	x = p_screen.GetWindowWidth() / 2;
-	y = p_screen.GetWindowHeight() / 2;
-	scale = 50;
-	color = { 0, 255, 0, 255 };
-	speed = 5;
-	Xdir = 1;
-	Ydir = 0;
-	snakeprevX = 1;
-	snakeprevY = 1;
 }
 
-snake::~snake()
+float snake::GetX()
 {
-
+	return Position.x;
 }
 
-int snake::GetX()
+float snake::GetY()
 {
-	return x;
+	return Position.y;
 }
 
-int snake::GetSnakePrevX()
+float snake::GetSnakePrevX()
 {
-	return snakeprevX;
+	return PreviousPosition.x;
 }
 
-int snake::GetSnakePrevY()
+float snake::GetSnakePrevY()
 {
-	return snakeprevY;
+	return PreviousPosition.y;
 }
 
-int snake::GetY()
+void snake::SetX(float p_positionX)
 {
-	return y;
+	Position.x = p_positionX;
 }
 
-void snake::SetX(int p_x)
+void snake::SetY(float p_positionY)
 {
-	x = p_x;
+	Position.y = p_positionY;
 }
 
-void snake::SetY(int p_y)
+void snake::DrawSnake()
 {
-	y = p_y;
-}
-
-void snake::DrawSnake(Screen& p_screen)
-{
-	p_screen.DrawRectangle(x, y, scale, scale, color);
+	DrawRectangle((int)Position.x, (int)Position.y, scale, scale, color);
 	for (int i = 0; i < Tail.size(); i++)
 	{
-		Tail[i].Draw(p_screen);
+		Tail[i].Draw();
 	}
 }
 
-void snake::AddTail(Screen& p_screen)
+void snake::AddTail()
 {
-	Tail.push_back(tail(p_screen, snakeprevX, snakeprevY));
+	Tail.push_back(tail(PreviousPosition));
 }
 
 
-void snake::Input(Screen &p_screen)
+void snake::Input()
 {
-	if (p_screen.IsKeyDown(Key::Left) && Xdir != 1)
+	if (IsKeyDown(KeyboardKey::KEY_A) && Xdir != 1)
 	{
 		Xdir = -1;
 		Ydir = 0;
 	}
-	else if (p_screen.IsKeyDown(Key::Right) && Xdir != -1)
+	else if (IsKeyDown(KeyboardKey::KEY_D) && Xdir != -1)
 	{
 		Xdir = 1;
 		Ydir = 0;
 	}
-	else if (p_screen.IsKeyDown(Key::Up) && Ydir != 1)
+	else if (IsKeyDown(KeyboardKey::KEY_W) && Ydir != 1)
 	{
 		Ydir = -1;
 		Xdir = 0;
 	}
-	else if (p_screen.IsKeyDown(Key::Down) && Ydir != -1)
+	else if (IsKeyDown(KeyboardKey::KEY_S) && Ydir != -1)
 	{
 		Ydir = 1;
 		Xdir = 0;
@@ -91,12 +83,11 @@ void snake::Input(Screen &p_screen)
 
 void snake::Movement()
 {
-	snakeprevX = x;
-	snakeprevY = y;
+	PreviousPosition = Position;
 	if (Tail.size() > 0)
 	{
-		Tail[0].SetX(snakeprevX);
-		Tail[0].SetY(snakeprevY);
+		Tail[0].SetX(PreviousPosition.x);
+		Tail[0].SetY(PreviousPosition.y);
 		if (Tail.size() > 1)
 		{
 			for (int i = 1; i < Tail.size(); i++)
@@ -110,8 +101,8 @@ void snake::Movement()
 	{
 		Tail[i].Update();
 	}
-	SetX(x + (scale * Xdir));
-	SetY(y + (scale * Ydir));
+	SetX(Position.x + (scale * Xdir));
+	SetY(Position.y + (scale * Ydir));
 }
 
 void snake::Update()
@@ -119,7 +110,7 @@ void snake::Update()
 	Movement();
 }
 
-void snake::Draw(Screen& p_screen)
+void snake::Draw()
 {
-	DrawSnake(p_screen);
+	DrawSnake();
 }

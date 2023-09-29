@@ -1,29 +1,32 @@
 #pragma once
-#include "screen.h"
+#include "raylib.h"
 #include "Tail.h"
 #include <vector>
 
 
 class snake
 {
-	int x, y, scale, speed, Xdir, Ydir;
+	Vector2 Position;
+	Vector2 PreviousPosition;
+	float SPEED;
+	int scale = 50;
+	int Xdir, Ydir;
 	Color color;
-	int snakeprevX, snakeprevY;
 
 	void Movement();
-	void DrawSnake(Screen& p_screen);
+	void DrawSnake();
 public:
 	std::vector<tail> Tail;
-	snake(Screen &p_screen);
-	~snake();
-	void AddTail(Screen &p_screen);
-	void Input(Screen& p_screen);
-	void Draw(Screen& p_screen);
+	snake();
+	~snake() = default;
+	void AddTail();
+	void Input();
+	void Draw();
 	void Update();
-	void SetX(int x);
-	void SetY(int y);
-	int GetX();
-	int GetY();
-	int GetSnakePrevX();
-	int GetSnakePrevY();
+	void SetX(float p_positionX);
+	void SetY(float p_positionY);
+	float GetX();
+	float GetY();
+	float GetSnakePrevX();
+	float GetSnakePrevY();
 };

@@ -1,20 +1,22 @@
 #pragma once
-#include "screen.h"
+#include "raylib.h"
 #include <vector>
 
 class tail
 {
-	int x, y, scale, tailprevX, tailprevY;
+	Vector2 Position;
+	Vector2 PreviousPosition;
+	int scale;
 	Color color;
 
-	void DrawTail(Screen& p_screen);
+	void DrawTail();
 public:
-	tail(Screen &p_screen, int prevX, int prevY);
-	~tail();
-	void SetX(int x);
-	void SetY(int y);
-	int GetPrevX();
-	int GetPrevY();
+	tail(Vector2 p_position);
+	~tail() = default;
+	void SetX(float x);
+	void SetY(float y);
+	float GetPrevX();
+	float GetPrevY();
 	void Update();
-	void Draw(Screen &p_screen);
+	void Draw();
 };

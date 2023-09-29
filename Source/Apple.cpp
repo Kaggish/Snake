@@ -1,29 +1,22 @@
 #include "Apple.h"
-#include "screen.h"
 #include <iostream>
 
 
-apple::apple(Screen &p_screen)
+apple::apple()
+	:Position({ 100.0f, 100.0f })
+	,scale(50)
+	,color{255, 0, 0, 255}
 {
-	x = 100;
-	y = 100;
-	scale = 50;
-	color = { 255, 0, 0, 255 };
 }
 
-apple::~apple()
+float apple::GetX()
 {
-
+	return Position.x;
 }
 
-int apple::GetX()
+float apple::GetY()
 {
-	return x;
-}
-
-int apple::GetY()
-{
-	return y;
+	return Position.y;
 }
 
 int apple::GetScale()
@@ -32,23 +25,23 @@ int apple::GetScale()
 }
 
 
-void apple::SetPosition(Screen& p_screen)
+void apple::SetPosition()
 {
-	x = (rand() % 20) * 50;
-	y = (rand() % 20) * 50;
+	Position.x = static_cast <float> ((rand() % 10) * 50);
+	Position.y = static_cast <float> ((rand() % 10) * 50);
 }
 
-void apple::DrawApple(Screen& p_screen)
+void apple::DrawApple()
 {
-	p_screen.DrawRectangle(x, y, scale, scale, color);
+	DrawRectangle((int)Position.x, (int)Position.y, scale, scale, color);
 }
 
-void apple::Update(Screen &p_screen)
+void apple::Update()
 {
-	SetPosition(p_screen);
+	SetPosition();
 }
 
-void apple::Draw(Screen& p_screen)
+void apple::Draw()
 {
-	DrawApple(p_screen);
+	DrawApple();
 }

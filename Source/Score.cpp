@@ -1,19 +1,11 @@
 #include "Score.h"
-#include "screen.h"
 #include <iostream>
-#include <string>
 
-score::score(Screen &p_screen)
+score::score()
+	:Position{(float)GetScreenWidth() / 2, 0.0f}
+	,Score(0)
+	,color{255, 255, 255, 255}
 {
-	x = p_screen.GetWindowWidth() / 2 - 90;
-	y = 0;
-	Score = 0;
-	color = { 255, 255, 255, 255 };
-}
-
-score::~score()
-{
-
 }
 
 int score::GetScore()
@@ -21,9 +13,9 @@ int score::GetScore()
 	return Score;
 }
 
-void score::DrawText(Screen &p_screen)
+void score::WriteText()
 {
-	p_screen.DrawText(x, y, color, "Score: " + std::to_string(GetScore()));
+	DrawText(TextFormat("Score: %d", Score), (int)Position.x, (int)Position.y, 20, color);
 }
 
 void score::AddScore()
@@ -36,7 +28,7 @@ void score::Update()
 	AddScore();
 }
 
-void score::Draw(Screen &p_screen)
+void score::Draw()
 {
-	DrawText(p_screen);
+	WriteText();
 }

@@ -1,19 +1,20 @@
 #pragma once
-#include "screen.h"
+#include "raylib.h"
 
 class apple
 {
-	int x, y, scale;
+	Vector2 Position;
+	int scale;
 	Color color;
 
-	void DrawApple(Screen& p_screen);
-	void SetPosition(Screen& p_screen);
+	void DrawApple();
+	void SetPosition();
 public:
-	apple(Screen& p_screen);
-	~apple();
-	void Update(Screen &p_screen);
-	void Draw(Screen& p_screen);
-	int GetX();
-	int GetY();
+	apple();
+	~apple() = default;
+	void Update();
+	void Draw();
+	float GetX();
+	float GetY();
 	int GetScale();
 };

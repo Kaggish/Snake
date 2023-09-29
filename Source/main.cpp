@@ -1,31 +1,88 @@
-//Jakub Orlowski Date: 2021-12-12//
-#include "Screen.h"
+/*******************************************************************************************
+*
+*   raylib [core] example - Basic window
+*
+*   Welcome to raylib!
+*
+*   To test examples, just press F6 and execute raylib_compile_execute script
+*   Note that compiled executable is placed in the same folder as .c file
+*
+*   You can find all basic examples on C:\raylib\raylib\examples folder or
+*   raylib official webpage: www.raylib.com
+*
+*   Enjoy using raylib. :)
+*
+*   Example originally created with raylib 1.0, last time updated with raylib 1.0
+*
+*   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
+*   BSD-like license that allows static linking with closed source software
+*b
+*   Copyright (c) 2013-2022 Ramon Santamaria (@raysan5)
+*
+********************************************************************************************/
+
+#include "raylib.h"
 #include "Game.h"
 
-int screenWidth = 1000;
-int screenHeight = 1000;
+//------------------------------------------------------------------------------------
+// Program main entry point
+//------------------------------------------------------------------------------------
+int main(void)
+{    
+    // Initialization
+    //--------------------------------------------------------------------------------------
+    const int screenWidth = 1100;
+    const int screenHeight = 900;
 
-int main(int argc, char** argv)
-{
-	int seconds = 0;
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
-	Screen screen(screenWidth, screenHeight, "Galba");
-	Game game(screen);
- 	while (screen.IsOpen())
-	{
-		seconds++;
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 
-		screen.Clear();
+    //--------------------------------------------------------------------------------------
 
-		game.ProcessInput(screen);
-		if (seconds == 15)
-		{
-			game.Update(screen);
-			seconds = 0;
-		}
-		game.Draw(screen);
+    InitAudioDevice();
 
-		screen.Display();
-	}
-	return 0;
+    auto sound = LoadSound("./hitHurt.ogg");
+
+    Game game;
+    int seconds = 0;
+
+
+    // Main game loop
+    while (!WindowShouldClose())    // Detect window close button or ESC key
+    {
+        seconds++;
+        // Update
+        //----------------------------------------------------------------------------------
+        // TODO: Update your variables here
+        //----------------------------------------------------------------------------------
+
+        game.ProcessInput();
+
+        if (seconds % 60 == 15)
+        {
+            game.Update();
+            seconds = 0;
+        }
+
+        // Draw
+        //----------------------------------------------------------------------------------
+        BeginDrawing();
+
+        ClearBackground(BLACK);
+
+        game.Draw();
+
+        EndDrawing();
+        //----------------------------------------------------------------------------------
+    }
+
+    CloseAudioDevice();
+    
+    // De-Initialization
+    //--------------------------------------------------------------------------------------
+    CloseWindow();        // Close window and OpenGL context
+    //--------------------------------------------------------------------------------------
+
+    return 0;
 }
