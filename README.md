@@ -1,6 +1,29 @@
 # Snake
-Snake copy made in C++
+Snake copy made in C++ with raylib
+
+TODO:
+Add sounds:
+Snake eating sound
+Score increment sound
+Lose sound
+////////////
+
+Fix collision:
+fix collision between the snake and the apple
+////////////
+
+Fix randomized position of the apple:
+It can spawn on the snake and only spawns on the left side of the screen
+////////////
+
+Add UI:
+Add a menu for the game
+Add a lose screen
+////////////
+
+Add texture::
+texture for snake
+texture for apple
+make the map more colorful
 
 
-The galba "engine" that is used for this project is not mine, it was created by my teacher,
-same goes for the screen class that is in the project.
