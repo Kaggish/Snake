@@ -27,3 +27,6 @@ texture for apple
 make the map more colorful
 
 
+Make the game use more modern c++
+
+
