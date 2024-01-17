@@ -1,4 +1,6 @@
 # Snake
+First year project that I am remaking
+
 Snake copy made in C++ with raylib
 
 TODO:
