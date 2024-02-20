@@ -1,7 +1,7 @@
 # Snake
 First year project that I am remaking
 
-Snake copy made in C++ with raylib
+Snake copy made in C++ with raylib, it was originally based on a library that our teacher created, but as the library does not have all features needed I changed it to raylib
 
 TODO:
 Add sounds:
