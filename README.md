@@ -1,5 +1,6 @@
 # Snake
 First year project that I have remaked in Raylib
+This project was my first ever game made during my studies at Uppsala University in Game design and programming
 
 # Controls
 WASD to move
